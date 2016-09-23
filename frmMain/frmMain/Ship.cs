@@ -8,11 +8,11 @@ namespace frmMain
 {
      public class Ship
     {
-       private byte _Health;
-       private string _ShipImageAddress;
-       private string _BulletImageAddress = "";
+       protected byte _Health;
+       protected string _ShipImageAddress;
+       protected string _BulletImageAddress = "";
 
-       public static void FireBullet(bool EnemyFire) //If EnemyFire = True then fire is from an enemy and can damage player
+       public static void FireBullet(bool EnemyFire, Form1 frm) //If EnemyFire = True then fire is from an enemy and can damage player
        {
 
        }
