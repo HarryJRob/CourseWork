@@ -23,13 +23,14 @@ namespace frmMain
 
 
             string _rootPath = AppDomain.CurrentDomain.BaseDirectory;
-            String[] _pathSeparators = new String[] { "\\" };
+            String[] _pathSeparators = { "\\" };
             string[] _rootPathSplit = _rootPath.Split(_pathSeparators, StringSplitOptions.RemoveEmptyEntries);
+            _rootPathSplit[_rootPathSplit.Length - 3] = null;
             _rootPathSplit[_rootPathSplit.Length - 2] = null;
             _rootPathSplit[_rootPathSplit.Length - 1] = null;
-            _rootPath = string.Join(@" ", _rootPathSplit.Where(s => !String.IsNullOrEmpty(s)));
+            _rootPath = string.Join(@"\", _rootPathSplit.Where(s => !String.IsNullOrEmpty(s)));
 
-            _ShipImageAddress = AppDomain.CurrentDomain.BaseDirectory  + @"PlayerAssets\Player.png";
+            _ShipImageAddress = _rootPath  + @"\PlayerAssets\Player.png";
 
             PlayerPictureBox.Location = new Point(20 , 20);
             PlayerPictureBox.Name = "PlayerPictureBox";
