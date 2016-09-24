@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 
 namespace frmMain
 {
@@ -18,7 +20,16 @@ namespace frmMain
         {
             _Health = 5;
             _BulletImageAddress = @"\PlayerAssets";
-            _ShipImageAddress = AppDomain.CurrentDomain.BaseDirectory + @"\\PlayerAssets\Player.png";
+
+
+            string _rootPath = AppDomain.CurrentDomain.BaseDirectory;
+            String[] _pathSeparators = new String[] { "\\" };
+            string[] _rootPathSplit = _rootPath.Split(_pathSeparators, StringSplitOptions.RemoveEmptyEntries);
+            _rootPathSplit[_rootPathSplit.Length - 2] = null;
+            _rootPathSplit[_rootPathSplit.Length - 1] = null;
+            _rootPath = string.Join(@" ", _rootPathSplit.Where(s => !String.IsNullOrEmpty(s)));
+
+            _ShipImageAddress = AppDomain.CurrentDomain.BaseDirectory  + @"PlayerAssets\Player.png";
 
             PlayerPictureBox.Location = new Point(20 , 20);
             PlayerPictureBox.Name = "PlayerPictureBox";
