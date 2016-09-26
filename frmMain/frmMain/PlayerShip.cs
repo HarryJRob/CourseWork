@@ -18,7 +18,7 @@ namespace frmMain
         private int _velocity = _DefaultVelocity;
         PictureBox PlayerPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
 
-        public void LoadPlayerShip(Form1 frm)
+        public void LoadPlayerShip(Form1 frm,byte PlayerNumber)
         {
             _Health = 5;
             _BulletImageAddress = @"\PlayerAssets";
@@ -35,10 +35,23 @@ namespace frmMain
 
             Bitmap TempImage = new Bitmap(Image.FromFile(_ShipImageAddress));
 
-            PlayerPictureBox.Location = new Point(20 , 20);
             PlayerPictureBox.Name = "PlayerPictureBox";
             PlayerPictureBox.Image = new Bitmap(TempImage, new Size(TempImage.Width/5,TempImage.Height/5));
             PlayerPictureBox.Size = new Size(PlayerPictureBox.Image.Size.Width, PlayerPictureBox.Image.Size.Height);
+
+            if (PlayerNumber == 1)
+            {
+                PlayerPictureBox.Location = new Point(20, frm.Height / 2 - PlayerPictureBox.Size.Height/2 - 1);
+            }
+            else if (PlayerNumber == 2)
+            {
+                PlayerPictureBox.Location = new Point(20, frm.Height / 2 + PlayerPictureBox.Size.Height/2 + 1);
+            }
+            else if (PlayerNumber == 3)
+            {
+                PlayerPictureBox.Location = new Point(20, frm.Height / 2 - PlayerPictureBox.Size.Height);
+            }
+
             frm.Controls.Add(PlayerPictureBox);
         }
 

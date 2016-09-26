@@ -24,9 +24,17 @@ namespace frmMain
 
         public Form1()
         {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
             DialogResult TwoPlayerResult = MessageBox.Show("Would you like to play two player?",
-                "How many players?",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+    "How many players?",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (TwoPlayerResult == System.Windows.Forms.DialogResult.Yes)
             {
@@ -37,24 +45,18 @@ namespace frmMain
                 TwoPlayer = false;
             }
 
-            InitializeComponent();
             if (TwoPlayer)
             {
-                Player1.LoadPlayerShip(this);
-                Player2.LoadPlayerShip(this);
+                Player1.LoadPlayerShip(this, 1);
+                Player2.LoadPlayerShip(this, 2);
             }
             else
             {
-               
-                Player1.LoadPlayerShip(this);
+
+                Player1.LoadPlayerShip(this, 3);
                 Player2 = null;
             }
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         /*I should be able to encapsulate this!
