@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public struct Bullet
-{
-    private int ID;
-    enum BulletType {Friendly, Enemy}
-}
+//public struct Bullet
+//{
+//    private int ID;
+//    enum BulletType {Friendly, Enemy}
+//}
 
 namespace frmMain
 {
@@ -24,9 +24,20 @@ namespace frmMain
 
         public Form1()
         {
-            TwoPlayer = false;
+            DialogResult TwoPlayerResult = MessageBox.Show("Would you like to play two player?",
+                "How many players?",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (TwoPlayerResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                TwoPlayer = true;
+            }
+            else
+            {
+                TwoPlayer = false;
+            }
+
             InitializeComponent();
-            List<Bullet> Bullets = new List<Bullet>();
             if (TwoPlayer)
             {
                 Player1.LoadPlayerShip(this);

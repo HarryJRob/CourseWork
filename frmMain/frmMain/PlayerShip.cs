@@ -12,15 +12,16 @@ namespace frmMain
 {
     class PlayerShip : Ship
     {
-        private bool _moveUp, _moveDown, _moveLeft, _moveRight,_spaceBar,_shift = false;
-        private int _velocity = 10;
+        private bool _moveUp, _moveDown, _moveLeft, _moveRight,_fireBullet,_boost = false;
+        private const int _DefaultVelocity = 5;
+        private const int _DefaultBoostSpeed = 10;
+        private int _velocity = _DefaultVelocity;
         PictureBox PlayerPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
 
         public void LoadPlayerShip(Form1 frm)
         {
             _Health = 5;
             _BulletImageAddress = @"\PlayerAssets";
-
 
             string _rootPath = AppDomain.CurrentDomain.BaseDirectory;
             String[] _pathSeparators = { "\\" };
@@ -32,94 +33,76 @@ namespace frmMain
 
             _ShipImageAddress = _rootPath  + @"\PlayerAssets\Player.png";
 
+            Bitmap TempImage = new Bitmap(Image.FromFile(_ShipImageAddress));
+
             PlayerPictureBox.Location = new Point(20 , 20);
             PlayerPictureBox.Name = "PlayerPictureBox";
-            PlayerPictureBox.Image = new Bitmap(_ShipImageAddress);
+            PlayerPictureBox.Image = new Bitmap(TempImage, new Size(TempImage.Width/5,TempImage.Height/5));
             PlayerPictureBox.Size = new Size(PlayerPictureBox.Image.Size.Width, PlayerPictureBox.Image.Size.Height);
             frm.Controls.Add(PlayerPictureBox);
         }
 
-        public bool MoveUp
-        {
-            get
-            {
-                return _moveUp;
-            }
-            set
-            {
-                _moveUp = value;
-            }
-        }
-
-        public bool MoveDown
-        {
-            get
-            {
-                return _moveDown;
-            }
-            set
-            {
-                _moveDown = value;
-            }
-        }
-
-        public bool MoveRight
-        {
-            get
-            {
-                return _moveRight;
-            }
-            set
-            {
-                _moveRight = value;
-            }
-        }
-
-        public bool MoveLeft
-        {
-            get
-            {
-                return _moveLeft;
-            }
-            set
-            {
-                _moveLeft = value;
-            }
-        }
-
-        public bool SpaceBar
-        {
-            get
-            {
-                return SpaceBar;
-            }
-            set
-            {
-                _spaceBar = value;
-            }
-        }   //Fire
-
-        public bool Shift
-        {
-            get
-            {
-                return _shift;
-            }
-            set
-            {
-                _shift = value;
-            }
-        }      //Boost
-
-        public void KeyDown(KeyEventArgs e,int controlsAllowed) //1 = WASD, 2 = UpDownLeftRight, 3 = Both
+        public void KeyDown(KeyEventArgs e,byte controlsAllowed) //1 = WASD, 2 = UpDownLeftRight, 3 = Both
         {
             if (controlsAllowed == 1)
             {
+                if (e.KeyCode == Keys.W)
+                {
+                    _moveUp = true;
+                }
 
+                if (e.KeyCode == Keys.A)
+                {
+                    _moveLeft = true;
+                }
+
+                if (e.KeyCode == Keys.D)
+                {
+                    _moveRight = true;
+                }
+
+                if (e.KeyCode == Keys.S)
+                {
+                    _moveDown = true;
+                }
+                if (e.KeyCode == Keys.ShiftKey)
+                {
+                    _boost = true;
+                }
+                if (e.KeyCode == Keys.Space)
+                {
+                    _fireBullet = true;
+                }
             }
             else if (controlsAllowed == 2)
             {
+                if (e.KeyCode == Keys.Up)
+                {
+                    _moveUp = true;
+                }
 
+                if (e.KeyCode == Keys.Left)
+                {
+                    _moveLeft = true;
+                }
+
+                if (e.KeyCode == Keys.Right)
+                {
+                    _moveRight = true;
+                }
+
+                if (e.KeyCode == Keys.Down)
+                {
+                    _moveDown = true;
+                }
+                if (e.KeyCode == Keys.ControlKey) //Oddly doesnt worth with RShift and NumPad 0. Will Question
+                {
+                    _boost = true;
+                }
+                if (e.KeyCode == Keys.Divide)
+                {
+                    _fireBullet = true;
+                }
             }
             else if (controlsAllowed == 3)
             {
@@ -142,13 +125,13 @@ namespace frmMain
                 {
                     _moveDown = true;
                 }
-                if (e.KeyCode == Keys.ShiftKey)
+                if (e.KeyCode == Keys.ShiftKey )
                 {
-                    _shift = true;
+                    _boost = true;
                 }
                 if (e.KeyCode == Keys.Space)
                 {
-                    _spaceBar = true;
+                    _fireBullet = true;
                 }
             }
         }
@@ -157,11 +140,63 @@ namespace frmMain
         {
             if (controlsAllowed == 1)
             {
+                if (e.KeyCode == Keys.W)
+                {
+                    _moveUp = false;
+                }
 
+                if (e.KeyCode == Keys.A)
+                {
+                    _moveLeft = false;
+                }
+
+                if (e.KeyCode == Keys.D)
+                {
+                    _moveRight = false;
+                }
+
+                if (e.KeyCode == Keys.S)
+                {
+                    _moveDown = false;
+                }
+                if (e.KeyCode == Keys.ShiftKey)
+                {
+                    _boost = false;
+                }
+                if (e.KeyCode == Keys.Space)
+                {
+                    _fireBullet = false;
+                }
             }
             else if (controlsAllowed == 2)
             {
+                if (e.KeyCode == Keys.Up)
+                {
+                    _moveUp = false;
+                }
 
+                if (e.KeyCode == Keys.Left)
+                {
+                    _moveLeft = false;
+                }
+
+                if (e.KeyCode == Keys.Right)
+                {
+                    _moveRight = false;
+                }
+
+                if (e.KeyCode == Keys.Down)
+                {
+                    _moveDown = false;
+                }
+                if (e.KeyCode == Keys.ControlKey )
+                {
+                    _boost = false;
+                }
+                if (e.KeyCode == Keys.Divide)
+                {
+                    _fireBullet = false;
+                }
             }
             else if (controlsAllowed == 3)
             {
@@ -186,17 +221,30 @@ namespace frmMain
                 }
                 if (e.KeyCode == Keys.ShiftKey)
                 {
-                    _shift = false;
+                    _boost = false;
                 }
                 if (e.KeyCode == Keys.Space)
                 {
-                    _spaceBar = false;
+                    _fireBullet = false;
                 }
             }
         }
 
         public void ActionCheck(Form1 frm)
         {
+            if (_boost)
+            {
+                if (_velocity <= _DefaultBoostSpeed)
+                {
+                    _velocity += 1;
+                }
+
+            }
+            else if (_velocity >= _DefaultVelocity )
+            {
+                _velocity -= 1 ;
+            }
+
             if (_moveUp)
             {
                 PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X, PlayerPictureBox.Location.Y - _velocity); //Negative is Up
@@ -213,18 +261,10 @@ namespace frmMain
             {
                 PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X + _velocity, PlayerPictureBox.Location.Y);
             }
-            if (_spaceBar)
+            if (_fireBullet)
             {
                 Ship.FireBullet(false, frm);
-                _spaceBar = false;
-            }
-            if (_shift)
-            {
-                _velocity = 20;
-            }
-            else
-            {
-                _velocity = 5;
+                _fireBullet = false;
             }
         }
     }
