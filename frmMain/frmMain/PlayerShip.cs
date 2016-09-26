@@ -16,6 +16,7 @@ namespace frmMain
         private const int _DefaultVelocity = 5;
         private const int _DefaultBoostSpeed = 10;
         private int _velocity = _DefaultVelocity;
+        private List<Bullet> Bullets = new List<Bullet> {};
         PictureBox PlayerPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
 
         public void LoadPlayerShip(Form1 frm,byte PlayerNumber)
