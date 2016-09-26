@@ -112,7 +112,7 @@ namespace frmMain
                 {
                     _boost = true;
                 }
-                if (e.KeyCode == Keys.Divide)
+                if (e.KeyCode == Keys.Enter)
                 {
                     _fireBullet = true;
                 }
@@ -202,11 +202,11 @@ namespace frmMain
                 {
                     _moveDown = false;
                 }
-                if (e.KeyCode == Keys.ControlKey )
+                if (e.KeyCode == Keys.ControlKey)
                 {
                     _boost = false;
                 }
-                if (e.KeyCode == Keys.Divide)
+                if (e.KeyCode == Keys.Enter )
                 {
                     _fireBullet = false;
                 }
@@ -276,8 +276,8 @@ namespace frmMain
             }
             if (_fireBullet)
             {
-                Ship.FireBullet(false, frm);
                 _fireBullet = false;
+                Ship.FireBullet(false, frm);
             }
         }
     }

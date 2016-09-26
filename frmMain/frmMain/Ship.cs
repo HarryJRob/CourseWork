@@ -14,7 +14,7 @@ namespace frmMain
 
        public static void FireBullet(bool EnemyFire, Form1 frm) //If EnemyFire = True then fire is from an enemy and can damage player
        {
-
+           System.Windows.Forms.MessageBox.Show("Hello, World");
        }
     }
 
