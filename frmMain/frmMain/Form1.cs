@@ -59,11 +59,6 @@ namespace frmMain
 
         }
 
-        /*I should be able to encapsulate this!
-        * If i do i can have another player with their own controls e.g. If instantiated with 1 as parameter then responds to WASD if 2 then Up,Down,Left,Right otherwise allow both
-         * Done!
-        */
-
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (TwoPlayer)
@@ -93,7 +88,7 @@ namespace frmMain
             {
                 Player1.KeyUp(e, 3);
             }
-        } //Same again
+        } 
 
         private void GameTick_Tick(object sender, EventArgs e)
         {

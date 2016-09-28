@@ -8,7 +8,8 @@ namespace frmMain
 {
     class Bullet
     {
-
-
+        int _velocity;
+        int _dmg;
+        string _bulletImageLocationPath;
     }
 }

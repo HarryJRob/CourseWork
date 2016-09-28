@@ -15,45 +15,31 @@ namespace frmMain
         private bool _moveUp, _moveDown, _moveLeft, _moveRight,_fireBullet,_boost = false;
         private const int _DefaultVelocity = 5;
         private const int _DefaultBoostSpeed = 10;
-        private int _velocity = _DefaultVelocity;
+        private int _velocity = _DefaultVelocity; //May add both horizontal and verical so i can resolve the vector and make the movement smoother
         private List<Bullet> Bullets = new List<Bullet> {};
-        PictureBox PlayerPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
+        //PictureBox _ShipPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
 
-        public void LoadPlayerShip(Form1 frm,byte PlayerNumber)
+        public void LoadPlayerShip(Form1 frm,byte _playerNumber)
         {
-            _Health = 5;
-            _BulletImageAddress = @"\PlayerAssets";
+            _health = 5;
+            _bulletImageAddress = @"\PlayerAssets";
+            LoadResizeImage(_ShipPictureBox, @"\PlayerAssets\Player.png", 90, 90);
+            LoadUserInterface(frm, _playerNumber);
 
-            string _rootPath = AppDomain.CurrentDomain.BaseDirectory;
-            String[] _pathSeparators = { "\\" };
-            string[] _rootPathSplit = _rootPath.Split(_pathSeparators, StringSplitOptions.RemoveEmptyEntries);
-            _rootPathSplit[_rootPathSplit.Length - 3] = null;
-            _rootPathSplit[_rootPathSplit.Length - 2] = null;
-            _rootPathSplit[_rootPathSplit.Length - 1] = null;
-            _rootPath = string.Join(@"\", _rootPathSplit.Where(s => !String.IsNullOrEmpty(s)));
-
-            _ShipImageAddress = _rootPath  + @"\PlayerAssets\Player.png";
-
-            Bitmap TempImage = new Bitmap(Image.FromFile(_ShipImageAddress));
-
-            PlayerPictureBox.Name = "PlayerPictureBox";
-            PlayerPictureBox.Image = new Bitmap(TempImage, new Size(TempImage.Width/5,TempImage.Height/5));
-            PlayerPictureBox.Size = new Size(PlayerPictureBox.Image.Size.Width, PlayerPictureBox.Image.Size.Height);
-
-            if (PlayerNumber == 1)
+            if (_playerNumber == 1)
             {
-                PlayerPictureBox.Location = new Point(20, frm.Height / 2 - PlayerPictureBox.Size.Height/2 - 1);
+                _ShipPictureBox.Location = new Point(20, frm.Height / 2 - _ShipPictureBox.Size.Height/2 - 1);
             }
-            else if (PlayerNumber == 2)
+            else if (_playerNumber == 2)
             {
-                PlayerPictureBox.Location = new Point(20, frm.Height / 2 + PlayerPictureBox.Size.Height/2 + 1);
+                _ShipPictureBox.Location = new Point(20, frm.Height / 2 + _ShipPictureBox.Size.Height/2 + 1);
             }
-            else if (PlayerNumber == 3)
+            else if (_playerNumber == 3)
             {
-                PlayerPictureBox.Location = new Point(20, frm.Height / 2 - PlayerPictureBox.Size.Height);
+                _ShipPictureBox.Location = new Point(20, frm.Height / 2 - _ShipPictureBox.Size.Height);
             }
 
-            frm.Controls.Add(PlayerPictureBox);
+            frm.Controls.Add(_ShipPictureBox);
         }
 
         public void KeyDown(KeyEventArgs e,byte controlsAllowed) //1 = WASD, 2 = UpDownLeftRight, 3 = Both
@@ -261,19 +247,19 @@ namespace frmMain
 
             if (_moveUp)
             {
-                PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X, PlayerPictureBox.Location.Y - _velocity); //Negative is Up
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y - _velocity); //Negative is Up
             }
             if (_moveDown)
             {
-                PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X, PlayerPictureBox.Location.Y + _velocity);
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y + _velocity);
             }
             if (_moveLeft)
             {
-                PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X - _velocity, PlayerPictureBox.Location.Y); //Negative is left
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X - _velocity, _ShipPictureBox.Location.Y); //Negative is left
             }
             if (_moveRight)
             {
-                PlayerPictureBox.Location = new Point(PlayerPictureBox.Location.X + _velocity, PlayerPictureBox.Location.Y);
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X + _velocity, _ShipPictureBox.Location.Y);
             }
             if (_fireBullet)
             {
@@ -281,5 +267,22 @@ namespace frmMain
                 Ship.FireBullet(false, frm);
             }
         }
+
+        public void LoadUserInterface(Form1 frm, byte _playerNumber)
+        {
+            if (_playerNumber == 1)
+            {
+                //UI for player 1
+            }
+            else if (_playerNumber == 2)
+            {
+                //UI for player 2
+            }
+            else if (_playerNumber == 3)
+            {
+                //UI if only 1 player
+            }
+        }
+
     }
 }
