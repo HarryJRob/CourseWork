@@ -42,9 +42,10 @@ namespace frmMain
                _passedImage.Image = new Bitmap(TempImage, new Size(_width, _height));
                _passedImage.Size = new Size(_passedImage.Image.Size.Width, _passedImage.Image.Size.Height);
            }
-           catch (Exception e)
+           catch (Exception)
            {
-               MessageBox.Show(Convert.ToString(e));
+               MessageBox.Show("Error loading file - Please check you have all required resources");
+               Application.Exit();
            } 
        }
     }
