@@ -15,11 +15,12 @@ namespace frmMain
        protected string _shipImageAddress = "";
        protected string _bulletImageAddress = "";
        protected PictureBox _ShipPictureBox = new PictureBox();
+       protected List<Bullet> Bullets;
 
-       public static void FireBullet(bool EnemyFire, Form1 frm) //If EnemyFire = True then fire is from an enemy and can damage player
-       {
-           System.Windows.Forms.MessageBox.Show("Hello, World");
-       }
+       //public void FireBullet() 
+       //{
+           
+       //}
 
        public static void LoadResizeImage(PictureBox _passedImage, string _localPath,int _width,int _height) //picturebox object, local path (within project folder), desired width, desired height
        {

@@ -10,17 +10,17 @@ using System.IO;
 
 namespace frmMain
 {
-    class PlayerShip : Ship
+    public class PlayerShip : Ship
     {
         private bool _moveUp, _moveDown, _moveLeft, _moveRight,_fireBullet,_boost = false;
         private const int _DefaultVelocity = 5;
         private const int _DefaultBoostSpeed = 10;
-        private int _velocity = _DefaultVelocity; //May add both horizontal and verical so i can resolve the vector and make the movement smoother
-        private List<Bullet> Bullets = new List<Bullet> {};
-        //PictureBox _ShipPictureBox = new PictureBox(); //Can be put in parent class but for simplicity leaving it here
+        private int _vVelocity = _DefaultVelocity; //Velocity handled seperately
+        private int _hVelocity = _DefaultVelocity;
 
         public void LoadPlayerShip(Form1 frm,byte _playerNumber)
         {
+            Bullets = new List<Bullet> { };
             _health = 5;
             _bulletImageAddress = @"\PlayerAssets";
             LoadResizeImage(_ShipPictureBox, @"\PlayerAssets\Player.png", 90, 90);
@@ -234,37 +234,49 @@ namespace frmMain
         {
             if (_boost)
             {
-                if (_velocity <= _DefaultBoostSpeed)
+                if (_vVelocity < _DefaultBoostSpeed)
                 {
-                    _velocity += 1;
+                    _vVelocity += 1;
+                }
+                if (_hVelocity < _DefaultBoostSpeed)
+                {
+                    _hVelocity += 1;
                 }
 
             }
-            else if (_velocity >= _DefaultVelocity )
+            else 
             {
-                _velocity -= 1 ;
+                if (_vVelocity > _DefaultVelocity)
+                {
+                    _vVelocity -= 1;
+                }
+                if (_hVelocity > _DefaultVelocity)
+                {
+                    _hVelocity -= 1;
+                }
             }
 
             if (_moveUp)
             {
-                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y - _velocity); //Negative is Up
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y - _hVelocity); //Negative is Up
             }
             if (_moveDown)
             {
-                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y + _velocity);
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X, _ShipPictureBox.Location.Y + _hVelocity);
             }
             if (_moveLeft)
             {
-                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X - _velocity, _ShipPictureBox.Location.Y); //Negative is left
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X - _vVelocity, _ShipPictureBox.Location.Y); //Negative is left
             }
             if (_moveRight)
             {
-                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X + _velocity, _ShipPictureBox.Location.Y);
+                _ShipPictureBox.Location = new Point(_ShipPictureBox.Location.X + _vVelocity, _ShipPictureBox.Location.Y);
             }
             if (_fireBullet)
             {
                 _fireBullet = false;
-                Ship.FireBullet(false, frm);
+                //Ship.FireBullet(false, frm,Bullets, _ShipPictureBox.Location);
+                FireBullet(frm);
             }
         }
 
@@ -282,6 +294,12 @@ namespace frmMain
             {
                 //UI if only 1 player
             }
+        }
+
+        public void FireBullet(Form1 frm)
+        {
+            //base.FireBullet();
+            Bullets.Add(new Bullet(10, 1, "Somewhere", false, frm, _ShipPictureBox.Location)); //Velocity, Damage, ImageLocation, EnemyFire, Form, Location
         }
 
     }
