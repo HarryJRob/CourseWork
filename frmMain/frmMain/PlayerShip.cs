@@ -21,7 +21,7 @@ namespace frmMain
         public void LoadPlayerShip(Form1 frm,byte _playerNumber)
         {
             _health = 5;
-            //_bulletImageAddress = @"\PlayerAssets";
+            _bulletImageAddress = @"\PlayerAssets\Bullet.png";
             LoadResizeImage(_ShipPictureBox, @"\PlayerAssets\Player.png", 90, 90);
             LoadUserInterface(frm, _playerNumber);
 

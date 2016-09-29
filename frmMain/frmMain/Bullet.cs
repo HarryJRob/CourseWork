@@ -19,9 +19,9 @@ namespace frmMain
         {
             _velocity = Velocity;
             _damage = Damage;
-            //Ship.LoadResizeImage(_bulletPictureBox, ImageLocation, 10, 10);
+            Ship.LoadResizeImage(_bulletPictureBox, ImageLocation, 25, 25);
             _bulletPictureBox.Location = new Point(ShipPosition.X + ShipWidth, ShipPosition.Y);
-            _bulletPictureBox.BackColor = Color.Red;
+            _bulletPictureBox.BackColor = Color.Transparent;
             frm.Controls.Add(_bulletPictureBox);
         }
     }
