@@ -276,6 +276,7 @@ namespace frmMain
                 _fireBullet = false;
                 FireBullet(frm);
             }
+            BulletTick();
         }
 
         public void LoadUserInterface(Form1 frm, byte _playerNumber)
@@ -297,7 +298,17 @@ namespace frmMain
         public override void FireBullet(Form1 frm)
         {
             base.FireBullet(frm);
-            Bullets.Add(new Bullet(10,1,_ShipPictureBox.Location,_ShipPictureBox.Size.Width, frm, _bulletImageAddress)); //Velocity, Damage, EnemyFire, Poistion,Width of PictureBox , Form, SpecialProperties
+            Bullets.Add(new Bullet(20,1,_ShipPictureBox.Location,_ShipPictureBox.Size.Width, frm, _bulletImageAddress)); //Velocity, Damage, EnemyFire, Poistion,Width of PictureBox , Form, SpecialProperties
+        }
+
+        public void BulletTick()
+        {
+            Bullets.RemoveAll(item => item == null);
+
+            foreach (Bullet b in Bullets)
+            {
+                b.MoveBullet();
+            }
         }
     }
 }

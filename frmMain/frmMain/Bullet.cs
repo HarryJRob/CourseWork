@@ -10,7 +10,7 @@ namespace frmMain
 {
     public class Bullet
     {
-        protected int _velocity {get; set;}
+        protected int _velocity;
         protected int _damage;
         protected PictureBox _bulletPictureBox = new PictureBox();
         //protected byte _specialEffects; //Exclude for now
@@ -23,6 +23,34 @@ namespace frmMain
             _bulletPictureBox.Location = new Point(ShipPosition.X + ShipWidth, ShipPosition.Y);
             _bulletPictureBox.BackColor = Color.Transparent;
             frm.Controls.Add(_bulletPictureBox);
+        }
+
+        public int Velocity 
+        {
+            get 
+            {
+                return _velocity ;
+            }
+            set 
+            {
+                _velocity = value;
+            }
+        }
+        public int Damage
+        {
+            get
+            {
+                return _damage;
+            }
+            set 
+            {
+                _damage = value;
+            }
+        }
+        public void MoveBullet()
+        {
+            _bulletPictureBox.Location = new Point(_bulletPictureBox.Location.X + _velocity, _bulletPictureBox.Location.Y);
+            
         }
     }
 }

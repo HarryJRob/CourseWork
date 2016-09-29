@@ -8,12 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//public struct Bullet
-//{
-//    private int ID;
-//    enum BulletType {Friendly, Enemy}
-//}
-
 namespace frmMain
 {
     public partial class Form1 : Form
