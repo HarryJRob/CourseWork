@@ -34,7 +34,6 @@
             // 
             // GameTick
             // 
-            this.GameTick.Enabled = true;
             this.GameTick.Interval = 1;
             this.GameTick.Tick += new System.EventHandler(this.GameTick_Tick);
             // 

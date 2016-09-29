@@ -50,7 +50,7 @@ namespace frmMain
                 Player1.LoadPlayerShip(this, 3);
                 Player2 = null;
             }
-
+            this.GameTick.Enabled = true;
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)

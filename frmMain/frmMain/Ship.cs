@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace frmMain
 {
-     public class Ship
+     public class Ship 
     {
        protected byte _health;
        protected string _shipImageAddress = "";

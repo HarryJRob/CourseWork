@@ -47,10 +47,17 @@ namespace frmMain
                 _damage = value;
             }
         }
+
+        public PictureBox BulletPicturebox
+        {
+            get
+            {
+                return _bulletPictureBox;
+            }
+        }
         public void MoveBullet()
         {
             _bulletPictureBox.Location = new Point(_bulletPictureBox.Location.X + _velocity, _bulletPictureBox.Location.Y);
-            
         }
     }
 }

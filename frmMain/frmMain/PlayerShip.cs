@@ -276,7 +276,7 @@ namespace frmMain
                 _fireBullet = false;
                 FireBullet(frm);
             }
-            BulletTick();
+            BulletTick(frm);
         }
 
         public void LoadUserInterface(Form1 frm, byte _playerNumber)
@@ -301,13 +301,20 @@ namespace frmMain
             Bullets.Add(new Bullet(20,1,_ShipPictureBox.Location,_ShipPictureBox.Size.Width, frm, _bulletImageAddress)); //Velocity, Damage, EnemyFire, Poistion,Width of PictureBox , Form, SpecialProperties
         }
 
-        public void BulletTick()
+        public void BulletTick(Form1 frm)
         {
             Bullets.RemoveAll(item => item == null);
-
-            foreach (Bullet b in Bullets)
+            if (Bullets.Count != 0)
             {
-                b.MoveBullet();
+                for (int i = 1; i <= Bullets.Count; i++)
+                {
+                    Bullets[i - 1].MoveBullet();
+                    if (!(frm.ClientRectangle.IntersectsWith(Bullets[i-1].BulletPicturebox.Bounds))) 
+                    {
+                        Bullets[i - 1].BulletPicturebox.Dispose();
+                         Bullets [i-1] = null;
+                    }
+                }
             }
         }
     }
