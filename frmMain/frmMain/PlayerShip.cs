@@ -20,9 +20,8 @@ namespace frmMain
 
         public void LoadPlayerShip(Form1 frm,byte _playerNumber)
         {
-            Bullets = new List<Bullet> { };
             _health = 5;
-            _bulletImageAddress = @"\PlayerAssets";
+            //_bulletImageAddress = @"\PlayerAssets";
             LoadResizeImage(_ShipPictureBox, @"\PlayerAssets\Player.png", 90, 90);
             LoadUserInterface(frm, _playerNumber);
 
@@ -275,7 +274,6 @@ namespace frmMain
             if (_fireBullet)
             {
                 _fireBullet = false;
-                //Ship.FireBullet(false, frm,Bullets, _ShipPictureBox.Location);
                 FireBullet(frm);
             }
         }
@@ -296,11 +294,10 @@ namespace frmMain
             }
         }
 
-        public void FireBullet(Form1 frm)
+        public override void FireBullet(Form1 frm)
         {
-            //base.FireBullet();
-            Bullets.Add(new Bullet(10, 1, "Somewhere", false, frm, _ShipPictureBox.Location)); //Velocity, Damage, ImageLocation, EnemyFire, Form, Location
+            base.FireBullet(frm);
+            Bullets.Add(new Bullet(10,1,_ShipPictureBox.Location,_ShipPictureBox.Size.Width, frm, _bulletImageAddress)); //Velocity, Damage, EnemyFire, Poistion,Width of PictureBox , Form, SpecialProperties
         }
-
     }
 }

@@ -15,12 +15,12 @@ namespace frmMain
        protected string _shipImageAddress = "";
        protected string _bulletImageAddress = "";
        protected PictureBox _ShipPictureBox = new PictureBox();
-       protected List<Bullet> Bullets;
+       protected List<Bullet> Bullets = new List<Bullet> { };
 
-       //public void FireBullet() 
-       //{
-           
-       //}
+       public virtual void FireBullet(Form1 frm)
+       {
+
+       }
 
        public static void LoadResizeImage(PictureBox _passedImage, string _localPath,int _width,int _height) //picturebox object, local path (within project folder), desired width, desired height
        {

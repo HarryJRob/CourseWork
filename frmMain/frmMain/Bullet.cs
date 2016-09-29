@@ -10,23 +10,18 @@ namespace frmMain
 {
     public class Bullet
     {
-        protected int _velocity;
+        protected int _velocity {get; set;}
         protected int _damage;
-        protected string _bulletImageLocationPath;
-        protected bool _enemyFire; // false = friendly, true = enemy
         protected PictureBox _bulletPictureBox = new PictureBox();
         //protected byte _specialEffects; //Exclude for now
 
-        public Bullet(int Velocity, int Damage, string BulletImagePath,bool EnemyFire, Form1 frm, Point ShipLocation) //Velocity, Damage, ImageLocation, Form
+        public Bullet(int Velocity, int Damage, Point ShipPosition,int ShipWidth , Form1 frm, string ImageLocation) //Velocity, Damage, EnemyFire, Poistion, Form, SpecialProperties, ImageLocationPath
         {
-            System.Windows.Forms.MessageBox.Show("Hello, World ");
             _velocity = Velocity;
             _damage = Damage;
-            _bulletImageLocationPath = BulletImagePath;
-            _enemyFire = EnemyFire;
-
-            _bulletPictureBox.BackColor = System.Drawing.Color.Red;
-            _bulletPictureBox.Location = ShipLocation;
+            //Ship.LoadResizeImage(_bulletPictureBox, ImageLocation, 10, 10);
+            _bulletPictureBox.Location = new Point(ShipPosition.X + ShipWidth, ShipPosition.Y);
+            _bulletPictureBox.BackColor = Color.Red;
             frm.Controls.Add(_bulletPictureBox);
         }
     }
